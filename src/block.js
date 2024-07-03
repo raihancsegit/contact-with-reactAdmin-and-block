@@ -1,3 +1,4 @@
+import "./blocks/contact-form";
 import { registerBlockType } from "@wordpress/blocks";
 import { InspectorControls } from "@wordpress/block-editor";
 import { SelectControl, PanelBody } from "@wordpress/components";

@@ -27,6 +27,15 @@ final class Enqueue extends Singleton {
 			'1.0.0',
 			true
 		);
+
+		// wp_register_script(
+		// 	'contactSignup-script',
+		// 	CONTACT_SIGNUP_URL . 'assets/js/script.js',
+		// 	[],
+		// 	'1.0.0',
+		// 	true
+		// );
+
 	}
 
 	public static function register_styles(){
@@ -57,9 +66,11 @@ final class Enqueue extends Singleton {
 
 		wp_localize_script('contactSignup-block-js', 'appLocalizer', $contact);
 		wp_localize_script( 'contactSignup-bundle', 'appLocalizer', $contact );
+		wp_localize_script( 'contactSignup-script', 'appLocalizer', $contact );
 	}
 
 	public function load(){
+		$this->enqueue_media(['contactSignup-script']);
 		$this->enqueue_media(['contactSignup-bundle', 'contactSignup-block-js']);
 		$this->enqueue_media(['contactSignup-style', 'contactSignup-editor-style'], 'style');
 	}

@@ -43,7 +43,48 @@ if (!class_exists('ContactBlock')) {
           ],
         ],
       ]);
+
+      register_block_type('contact-signup/form', array(
+        'render_callback' => [self::class,'contact_signup_form_render_callback']
+      ));
     }
+
+    // Render callback for the form
+public static function contact_signup_form_render_callback($attributes) {
+  ob_start();
+  ?>
+<form id="contact-signup-form" method="POST"
+    data-api-url="<?php echo esc_url(rest_url('contact-signup/v1/contact')); ?>"
+    data-nonce="<?php echo wp_create_nonce('wp_rest'); ?>"
+    data-predefined-hobbies='<?php echo json_encode(self::predefinedHobbies()); ?>'>
+    <label for="contact_name"><?php _e('Name', 'contact-signup'); ?></label>
+    <input type="text" id="contact_name" name="contact_name" required />
+
+    <label for="contact_address"><?php _e('Address', 'contact-signup'); ?></label>
+    <input type="text" id="contact_address" name="contact_address" required />
+
+    <label for="contact_phone"><?php _e('Phone', 'contact-signup'); ?></label>
+    <input type="text" id="contact_phone" name="contact_phone" required />
+
+    <label for="contact_email"><?php _e('Email', 'contact-signup'); ?></label>
+    <input type="email" id="contact_email" name="contact_email" required />
+
+    <label for="contact_hobbies"><?php _e('Hobbies (up to 3)', 'contact-signup'); ?></label>
+    <div class="tag-list-container">
+        <input type="text" id="contact_hobbies" name="contact_hobbies"
+            placeholder="<?php _e('Add hobbies, e.g. fishing, running', 'contact-signup'); ?>" />
+        <div class="tag-list"></div>
+    </div>
+
+    <button type="submit" id="contact-signup-submit"><?php _e('Sign Up', 'contact-signup'); ?></button>
+</form>
+<?php
+    return ob_get_clean();
+}
+
+public static function predefinedHobbies() {
+  return ['Fishing', 'Running', 'Reading', 'Cooking', 'Traveling', 'Gardening', 'Hiking', 'Photography'];
+}
 
     public static function render_block($attributes) {
       if (!isset($attributes['selectedContact']) || $attributes['selectedContact'] === 0) {
