@@ -13,6 +13,12 @@ if (!class_exists('ContactAPI')) {
                 'permission_callback' => [ __CLASS__, 'get_settings_permission' ]
             ));
 
+            register_rest_route('contact-signup/v1', '/contact', [
+                'methods' => 'POST',
+                'callback' => [__CLASS__, 'create_contact'],
+                'permission_callback' => '__return_true' // Open to all users
+            ]);
+
             register_rest_route('contact-signup/v1', '/contact/(?P<id>\d+)', array(
                 'methods' => 'DELETE',
                 'callback' => [__CLASS__, 'delete_contact'],
@@ -30,6 +36,27 @@ if (!class_exists('ContactAPI')) {
             $results = $wpdb->get_results("SELECT * FROM $table_name", ARRAY_A);
 
             return $results;
+        }
+
+        public static function create_contact($request) {
+            global $wpdb;
+            $table_name = $wpdb->prefix . 'contact_signup';
+
+            $name = sanitize_text_field($request->get_param('name'));
+            $address = sanitize_text_field($request->get_param('address'));
+            $phone = sanitize_text_field($request->get_param('phone'));
+            $email = sanitize_email($request->get_param('email'));
+            $hobbies = sanitize_text_field($request->get_param('hobbies'));
+
+            $wpdb->insert($table_name, [
+                'name' => $name,
+                'address' => $address,
+                'phone' => $phone,
+                'email' => $email,
+                'hobbies' => $hobbies,
+            ]);
+
+            return new \WP_REST_Response('Contact created', 201);
         }
 
         public static function delete_contact($request) {

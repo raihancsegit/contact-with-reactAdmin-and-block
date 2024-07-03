@@ -1,1 +1,30 @@
-.contact-card{background-color:#fff;border:1px solid #ddd;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,.1);margin:20px 0;max-width:400px;padding:20px;transition:transform .2s}.contact-card:hover{transform:translateY(-10px)}.contact-card h2{color:#333;margin-top:0}.contact-card p{color:#666;margin:5px 0}
+/*!****************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/editor.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************/
+/* Common styles for both frontend and editor */
+.contact-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px 0;
+  max-width: 400px;
+  background-color: #fff;
+  transition: transform 0.2s;
+}
+
+.contact-card:hover {
+  transform: translateY(-10px);
+}
+
+.contact-card h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.contact-card p {
+  margin: 5px 0;
+  color: #666;
+}
+
+/*# sourceMappingURL=editor.css.map*/
