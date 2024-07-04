@@ -20,7 +20,6 @@ final class Plugin extends Singleton {
 		add_action( 'admin_enqueue_scripts', [ $enqueue, 'init' ] );
 
 		Settings::init();
-		Shortcode::init();
 		ContactAPI::init();
 		ContactBlock::init();
 		

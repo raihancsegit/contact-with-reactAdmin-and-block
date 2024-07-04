@@ -21,20 +21,3 @@ if ( ! define( 'CONTACT_SIGNUP_DIR_URL', plugin_dir_url( __FILE__ )) ) define( '
 
 use Contact\SignUp\Plugin;
 Plugin::init();
-
-function contact_signup_enqueue_scripts() {
-  
-    wp_enqueue_script('contact-signup-script', CONTACT_SIGNUP_URL . 'assets/js/script.js', array('jquery'), null, true);
-
-    // Localize script to pass PHP data to JavaScript
-    wp_localize_script('contact-signup-script', 'ContactSignupData', array(
-        'apiUrl' => esc_url(rest_url('contact-signup/v1/contact')),
-        'nonce' => wp_create_nonce('wp_rest'),
-        'predefinedHobbies' => json_encode(predefinedHobbies()),
-    ));
-}
-add_action('wp_enqueue_scripts', 'contact_signup_enqueue_scripts');
-
-function predefinedHobbies() {
-    return ['Fishing', 'Running', 'Reading', 'Cooking', 'Traveling', 'Gardening', 'Hiking', 'Photography'];
-}

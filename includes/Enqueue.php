@@ -28,13 +28,13 @@ final class Enqueue extends Singleton {
 			true
 		);
 
-		// wp_register_script(
-		// 	'contactSignup-script',
-		// 	CONTACT_SIGNUP_URL . 'assets/js/script.js',
-		// 	[],
-		// 	'1.0.0',
-		// 	true
-		// );
+		wp_register_script(
+			'contact-signup-script', 
+			CONTACT_SIGNUP_URL . 'assets/js/script.js', 
+			array('jquery'), 
+			null, 
+			true
+		);
 
 	}
 
@@ -66,11 +66,21 @@ final class Enqueue extends Singleton {
 
 		wp_localize_script('contactSignup-block-js', 'appLocalizer', $contact);
 		wp_localize_script( 'contactSignup-bundle', 'appLocalizer', $contact );
-		wp_localize_script( 'contactSignup-script', 'appLocalizer', $contact );
+
+		wp_localize_script('contact-signup-script', 'ContactSignupData', array(
+			'apiUrl' => esc_url(rest_url('contact-signup/v1/contact')),
+			'nonce' => wp_create_nonce('wp_rest'),
+			'predefinedHobbies' => json_encode(self::predefinedHobbies()),
+		));
+		
+	}
+
+	public static function predefinedHobbies() {
+		return ['Fishing', 'Running', 'Reading', 'Cooking', 'Traveling', 'Gardening', 'Hiking', 'Photography'];
 	}
 
 	public function load(){
-		$this->enqueue_media(['contactSignup-script']);
+		$this->enqueue_media(['contact-signup-script']);
 		$this->enqueue_media(['contactSignup-bundle', 'contactSignup-block-js']);
 		$this->enqueue_media(['contactSignup-style', 'contactSignup-editor-style'], 'style');
 	}
