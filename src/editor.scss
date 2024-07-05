@@ -69,54 +69,6 @@
 
 /* contact-signup-form.css */
 
-/* Main form container */
-form {
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* Form labels */
-form label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
-  color: #333;
-}
-
-/* Form input fields */
-form input[type="text"],
-form input[type="email"] {
-  width: calc(100% - 20px);
-  padding: 12px;
-  margin-bottom: 15px;
-  border-radius: 4px;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-}
-
-/* Form submit button */
-form button {
-  display: block;
-  width: 100%;
-  padding: 12px;
-  background-color: #007cba;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: background-color 0.3s ease;
-}
-
-form button:hover {
-  background-color: #005a8c;
-}
-
 /* TagList component styles */
 .tag-list-container {
   margin-bottom: 15px;
